@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;700;900&display=swap"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container loginPage" id="container">
+    <div class="inner">
+        <div id="login-form" class="loginCont">
+            <div class="titleArea">로그인</div>
+            <div id="login-failed" style="display:none" class="alert alert-danger" role="alert">로그인에 실패하였습니다.</div>
+            <!--            카카오 로그인 주소 수정-->
+            <!--            onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=83a045702bcb9ef7cfab9e5dd660cbf8&redirect_uri=http://localhost:8080/user/kakao/callback&response_type=code'">-->
+            <form action="/user/login" method="post">
+                <div class="loginform">
+                    <div class="inputArea">
+                        <div class="userInfo">
+                            <div class="login-label login-id-label">아이디</div>
+                            <input type="text" name="username" class="login-input-box">
+                        </div>
+                        <div class="userInfo">
+                            <div class="login-label login-id-label">비밀번호</div>
+                            <input type="password" name="password" class="login-input-box">
+                        </div>
+                    </div>
+
+                    <div class="btnArea">
+                        <button id="login-id-submit" class="login_btn">로그인</button>
+                    </div>
+                </div>
+            </form>
+            <button onclick="location.href='/user/signup'" class="signup_btn">회원가입</button>
+            <div class="half_line">or</div>
+            <button id="login-kakao-btn" class="kakao_login_btn"
+                    onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=2b2c48606d8c211c9a9951bde1c6f2aa&redirect_uri=http://13.125.53.100/user/kakao/callback&amp;response_type=code'">
+                카카오로 로그인하기
+            </button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+
+<script>
+
+    const href = location.href;
+    const queryString = href.substring(href.indexOf("?") + 1)
+    if (queryString === 'error') {
+        const errorDiv = document.getElementById('login-failed');
+        errorDiv.style.display = 'block';
+    }
+
+</script>
+</html>

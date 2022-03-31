@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;700;900&display=swap"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
+
+    <script>
+
+
+
+        function idChk(){
+            var myid = document.getElementById('id').value;
+            var regul1 = /^[a-zA-Z0-9]{3,20}$/;
+            if(myid == ""){
+                document.querySelector('.idchk1').classList.remove('none');
+                $("input[name=username]").focus();
+            } else {
+                document.querySelector('.idchk1').classList.add('none');
+                if(!regul1.test(myid)) {
+                    document.querySelector('.idchk2').classList.remove('none');
+                    $("input[name=username]").focus();
+                } else {
+                    document.querySelector('.idchk2').classList.add('none');
+                }
+            }
+        }
+
+
+        function passchk(){
+            var mypass = document.getElementById('password').value;
+            var mypass2 = document.getElementById('password2').value;
+            if(mypass.length <= 3){
+                document.querySelector('.passchk1').classList.remove('none');
+                $("input[name=password]").focus();
+            } else if(mypass != mypass2){
+                document.querySelector('.passchk2').classList.remove('none');
+                    $("input[name=passwordCheck]").focus();
+            } else{
+                document.querySelector('.passchk1').classList.add('none');
+                document.querySelector('.passchk2').classList.add('none');
+                document.querySelector('.btnArea').setAttribute('date-check','yes');
+            }
+
+            if(document.querySelector('.btnArea').getAttribute('date-check') == "yes"){
+                document.querySelector('.login_btn').disabled = false;
+            }
+
+        }
+
+
+
+
+    </script>
+
+
+</head>
+
+
+<body>
+<div class="container signupPage" id="container">
+    <div class="inner">
+        <div id="login-form" class="loginCont">
+            <div class="titleArea">회원가입</div>
+
+            <form action="/user/signup" method="post">
+                <div class="loginform">
+                    <div class="inputArea">
+                        <div class="userInfo">
+                            <div class="login-label">아이디</div>
+                            <input type="text" name="username" class="login-input-box" id="id" onchange="idChk()">
+                            <p class="idchk1 none">아이디를 입력하지 않았습니다.</p>
+                            <p class="idchk2 none">아이디는 3자 이상 20자 이하, 알파벳 대소문자, 숫자로 이루어져야합니다.</p>
+
+                        </div>
+                        <div class="userInfo">
+                            <div class="login-label">비밀번호</div>
+                            <input type="password" name="password" id="password" class="login-input-box">
+                        </div>
+                        <div class="userInfo">
+                            <div class="login-label">비밀번호 확인</div>
+                            <input type="password" name="passwordCheck" id="password2" class="login-input-box" onchange="passchk()">
+                            <p class="passchk1 none">비밀번호는 4자 이상입니다.</p>
+                            <p class="passchk2 none">비밀번호가 일치하지 않습니다.</p>
+                            <p class="passchk3 none">비밀번호는 아이디와 같을 수 없습니다.</p>
+                        </div>
+
+                        <div class="userInfo">
+                            <div class="login-label">이메일</div>
+                            <input type="email" name="email" class="login-input-box">
+                        </div>
+                    </div>
+
+                    <div class="btnArea">
+                        <button id="login-id-submit" class="login_btn" disabled>회원가입</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+
+</body>
+</html>
